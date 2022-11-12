@@ -1,0 +1,47 @@
+<%- include('includes/head') %>
+<%- include('includes/navbar') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-8 my-3">
+                <h1 class="text-center">Agenda</h1>
+                <%- include('includes/messages') %> 
+
+                <% if(user) { %>
+
+                    <% if(contatos.length > 0) { %> 
+                        <div class="responsive-table">
+                            <table class="table my-3">
+                                <% contatos.forEach(contato => { %>
+                                    <% if(contato.criadoPor == user._id) { %>
+                                        <tr>
+                                            <td><%= contato.nome %> </td>
+                                            <td><%= contato.sobrenome %></td>
+                                            <td><%= contato.telefone%></td>
+                                            <td><%= contato.email %></td>
+                                            <td>
+                                                <a href="/contato/index/<%= contato.id %>">Editar</a>
+                                            </td>
+                                            <td>
+                                                <a class="text-danger" href="/contato/delete/<%= contato.id %>">Excluir</a>
+                                            </td>
+                                        </tr>
+                                    <% } %> 
+                                <% }) %> 
+                            </table>
+                        </div>
+
+                    <% } else { %>
+                        <p class="text-center lead"> Não existem contatos na sua agenda </p>
+                    <% } %>
+                <% } else { %>
+                    <p class="text-center lead">Faça login para acessar seus contatos</p>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+
+
+<%- include('includes/footer') %>

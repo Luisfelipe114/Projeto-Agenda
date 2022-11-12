@@ -1,0 +1,54 @@
+<%- include('includes/head') %>
+<%- include('includes/navbar') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-8 my-3">
+                <h1 class="text-center">Contato</h1>
+                <p class="text-center lead">Crie ou edite seu contato abaixo</p>
+
+                <%- include('includes/messages') %> 
+
+                <% if(contato.id) { %> 
+                <form class="form-contato" action="/contato/edit/<%= contato._id %> " method="POST">
+                        
+                <% } else { %> 
+                <form class="form-contato" form-contato action="/contato/register" method="POST">
+                        
+                <% } %>
+
+                <input type="hidden" name="_csrf" value = <%= csrfToken %> >
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input value = "<%= contato.nome %>" name="nome" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="sobrenome">Sobrenome</label>
+                    <input value = "<%= contato.sobrenome %>"  name="sobrenome" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input value = "<%= contato.email %>"  name="email" type="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input value = "<%= contato.telefone %>"  name="telefone" type="tel" class="form-control">
+                </div>
+
+                <% if(contato.id) { %> 
+                    <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                            
+                <% } else { %> 
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                <% } %>
+            
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+<%- include('includes/footer') %>
